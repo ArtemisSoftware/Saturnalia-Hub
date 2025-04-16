@@ -7,5 +7,5 @@ data class Performance(
     val artist: String = "",
     val location: String = "",
     val imageUrl: String = "",
-    val organizer: String? = null
+    val organizer: String = "",
 )
