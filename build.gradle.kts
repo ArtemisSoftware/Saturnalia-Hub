@@ -21,6 +21,11 @@ dependencies {
     // (in a separate module for demo project and in testMain).
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
+
+    implementation("org.jsoup:jsoup:1.16.1") // For web scraping
+    implementation("com.google.code.gson:gson:2.10.1") // For JSON conversion
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+
 }
 
 compose.desktop {
