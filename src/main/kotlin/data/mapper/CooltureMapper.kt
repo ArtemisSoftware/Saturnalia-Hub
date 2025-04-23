@@ -4,6 +4,7 @@ import domain.models.event.Coordinates
 import domain.models.event.Event
 import domain.models.event.Performance
 import domain.models.event.Summary
+import domain.util.extensions.toLocalDateTime
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -119,12 +120,12 @@ private fun Document.imageUrl() = select("div.image img").attr("src")
 
 private fun Document.toPerformances(): List<Performance>{
     val performance_0 = toPerformance0()
-    val performance_1 = toPerformance1()
-    val performance_2 = toPerformance2()
-    val performance_3 = toPerformance3()
-    val performance_4 = toPerformance4()
+//    val performance_1 = toPerformance1()
+//    val performance_2 = toPerformance2()
+//    val performance_3 = toPerformance3()
+//    val performance_4 = toPerformance4()
 
-    val performances = performance_0 + performance_1 + performance_2 + performance_3 + performance_4
+    val performances = performance_0 //+ performance_1 + performance_2 + performance_3 + performance_4
 
     return performances
 }
@@ -135,9 +136,8 @@ private fun Document.toPerformance0(): List<Performance>{
 
         performances.add(
             Performance(
-                name = it.title(),
-                date = it.date(),
-                time = "",
+                artist = it.title(),
+                date = it.date().toLocalDateTime(),
                 imageUrl = it.imageUrl() ?: ""
             )
         )
@@ -145,7 +145,7 @@ private fun Document.toPerformance0(): List<Performance>{
 
     return performances
 }
-
+/*
 private fun Document.toPerformance1(): List<Performance>{
     val performances = mutableListOf<Performance>()
 
@@ -289,7 +289,7 @@ private fun Document.toPerformance4(): List<Performance> {
 
     return performances
 }
-
+*/
 private fun Element.title() = this.text()
 private fun Element.imageUrl() = this.nextElementSibling()?.selectFirst("img")?.attr("src")
 private fun Element.date(): String {
