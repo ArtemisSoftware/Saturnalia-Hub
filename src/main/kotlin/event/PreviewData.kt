@@ -5,12 +5,13 @@ import domain.models.event.Performance
 import domain.models.event.Summary
 import event.create.CreateState
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 internal object PreviewData {
 
     val mockCoordinates = Coordinates(0.0, 0.0)
     val mockPerformance1 = Performance(
-        date = "2025-07-21",
+        date = LocalDateTime.now(),
         time = "20:30",
         name = "Summer Vibes Night",
         artist = "DJ Luna",
@@ -20,7 +21,7 @@ internal object PreviewData {
     )
 
     val mockPerformance2 = Performance(
-        date = "2025-08-05",
+        date = LocalDateTime.now(),
         time = "18:00",
         name = "Rock in Park",
         artist = "The Wild Ones",

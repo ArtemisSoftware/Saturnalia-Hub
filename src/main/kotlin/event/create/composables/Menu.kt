@@ -22,7 +22,11 @@ internal fun Menu(
             Text("Sumário")
         }
         OutlinedButton(onClick = { updateMenuOption(MenuType.PERFORMANCES) }) {
-            Text("Performances: $numberOfPerformances")
+            if(numberOfPerformances == 0){
+                Text("Performances")
+            } else{
+                Text("Performances: $numberOfPerformances")
+            }
         }
         OutlinedButton(onClick = showDialog) {
             Text("Download evento Coolture ")

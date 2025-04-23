@@ -1,7 +1,9 @@
 package domain.models.event
 
+import java.time.LocalDateTime
+
 data class Performance(
-    val date: String = "",
+    val date: LocalDateTime? = null,
     val time: String = "",
     val name: String = "",
     val artist: String = "",
