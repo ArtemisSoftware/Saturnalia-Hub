@@ -1,8 +1,9 @@
-package domain.models
+package domain.models.event
 
 import java.time.LocalDate
 
 data class Summary(
+    val id: Int = 1,
     val title: String = "",
     val location: String = "",
     val place: String = "",

@@ -10,6 +10,7 @@ import event.create.model.MenuType
 
 @Composable
 internal fun Menu(
+    numberOfPerformances: Int,
     showDialog: () -> Unit,
     updateMenuOption: (MenuType) -> Unit,
     modifier: Modifier = Modifier,
@@ -21,10 +22,10 @@ internal fun Menu(
             Text("Sumário")
         }
         OutlinedButton(onClick = { updateMenuOption(MenuType.PERFORMANCES) }) {
-            Text("Performances")
+            Text("Performances: $numberOfPerformances")
         }
         OutlinedButton(onClick = showDialog) {
-            Text("Download Coolture evento")
+            Text("Download evento Coolture ")
         }
     }
 }
@@ -33,6 +34,7 @@ internal fun Menu(
 @Composable
 private fun MenuPreview() {
     Menu(
+        numberOfPerformances = 2,
         showDialog = {},
         updateMenuOption = {}
     )

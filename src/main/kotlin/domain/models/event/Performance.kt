@@ -1,4 +1,4 @@
-package domain.models
+package domain.models.event
 
 data class Performance(
     val date: String = "",

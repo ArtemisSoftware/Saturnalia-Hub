@@ -1,8 +1,7 @@
 package domain.repository
 
-import domain.models.Event
-import org.jsoup.nodes.Document
+import domain.models.event.Event
 
 interface CooltureRepository {
-    fun getEvent(url: String): Event?
+    suspend fun getEvent(url: String): Event?
 }

@@ -1,8 +1,8 @@
 package event
 
-import domain.models.Coordinates
-import domain.models.Performance
-import domain.models.Summary
+import domain.models.event.Coordinates
+import domain.models.event.Performance
+import domain.models.event.Summary
 import event.create.CreateState
 import java.time.LocalDate
 
