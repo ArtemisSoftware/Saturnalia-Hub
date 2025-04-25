@@ -8,6 +8,8 @@ import domain.util.extensions.toLocalDateTime
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import presentation.utils.extensions.formatToDate
+import presentation.utils.extensions.formatToTime
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -134,11 +136,20 @@ private fun Document.toPerformance0(): List<Performance>{
     val performances = mutableListOf<Performance>()
     performances().forEach { it ->
 
+        val date = it.date().toLocalDateTime()
+        val currentDate = date?.formatToDate() ?: ""
+        val currentHour = date?.formatToTime() ?: ""
+
         performances.add(
             Performance(
-                artist = it.title(),
+                artist = it.title()
+                    .lowercase()
+                    .split(" ")
+                    .joinToString(" ") { it.replaceFirstChar { c -> c.uppercaseChar() } },
                 date = it.date().toLocalDateTime(),
-                imageUrl = it.imageUrl() ?: ""
+                imageUrl = it.imageUrl() ?: "",
+                currentDate = currentDate,
+                currentHour = currentHour
             )
         )
     }
