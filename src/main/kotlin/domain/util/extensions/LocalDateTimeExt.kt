@@ -1,10 +1,9 @@
 package domain.util.extensions
 
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.Month
+import kotlinx.datetime.*
 import java.time.format.TextStyle
 import java.util.Locale
+
 
 fun String.toLocalDateTime(): LocalDateTime? {
     val locale = Locale("pt", "PT")
@@ -31,6 +30,6 @@ fun String.toLocalDateTime(): LocalDateTime? {
     val time = LocalTime.parse(timePart)
 
     // Step 5: Create LocalDateTime
-    val year = LocalDateTime.now().year // or any logic to determine year
-    return LocalDateTime.of(year, month, day, time.hour, time.minute)
+    val year = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).year // or any logic to determine year
+    return LocalDateTime(year = year, month = month, dayOfMonth  = day, hour = time.hour, minute = time.minute)
 }

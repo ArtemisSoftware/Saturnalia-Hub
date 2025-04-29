@@ -4,14 +4,13 @@ import domain.models.event.Coordinates
 import domain.models.event.Performance
 import domain.models.event.Summary
 import event.create.CreateState
-import java.time.LocalDate
-import java.time.LocalDateTime
+import kotlinx.datetime.*
 
 internal object PreviewData {
 
     val mockCoordinates = Coordinates(0.0, 0.0)
     val mockPerformance1 = Performance(
-        date = LocalDateTime.now(),
+        date = Clock.System.now().toLocalDateTime(TimeZone.UTC),
         time = "20:30",
         name = "Summer Vibes Night",
         artist = "DJ Luna",
@@ -21,7 +20,7 @@ internal object PreviewData {
     )
 
     val mockPerformance2 = Performance(
-        date = LocalDateTime.now(),
+        date = Clock.System.now().toLocalDateTime(TimeZone.UTC),
         time = "18:00",
         name = "Rock in Park",
         artist = "The Wild Ones",
@@ -39,8 +38,8 @@ internal object PreviewData {
         location = "Porto",
         place = "Exponor Conference Center",
         address = "Rua da Feira, 4460-682 Matosinhos",
-        startDate = LocalDate.of(2025, 9, 5),
-        endDate = LocalDate.of(2025, 9, 7),
+        startDate = LocalDate(2025, 9, 5),
+        endDate = LocalDate(2025, 9, 7),
         time = "10:00",
         imageUrl = "https://example.com/images/tech_sound.jpg"
     )

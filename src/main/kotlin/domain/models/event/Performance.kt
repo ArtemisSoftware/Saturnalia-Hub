@@ -1,6 +1,7 @@
 package domain.models.event
 
-import java.time.LocalDateTime
+import kotlinx.datetime.LocalDateTime
+
 
 data class Performance(
     val date: LocalDateTime? = null,

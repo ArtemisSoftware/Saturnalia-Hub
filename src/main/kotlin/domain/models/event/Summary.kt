@@ -1,15 +1,21 @@
 package domain.models.event
 
-import java.time.LocalDate
+import domain.models.EventType
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 data class Summary(
-    val id: Int = 1,
+    val typeId: Int = EventType.eventTypes.first().id,
     val title: String = "",
     val location: String = "",
     val place: String = "",
     val address: String = "",
-    val startDate: LocalDate = LocalDate.now(),
-    val endDate: LocalDate = LocalDate.now(),
+    val startDate: LocalDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date,
+    val endDate: LocalDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date,
+    val schedules: List<Schedule> = emptyList(),
     val time: String = "",
     val imageUrl: String = "",
 )
