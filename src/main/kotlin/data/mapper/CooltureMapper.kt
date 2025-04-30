@@ -1,17 +1,14 @@
 package data.mapper
 
-import domain.models.event.Coordinates
-import domain.models.event.Event
-import domain.models.event.Performance
-import domain.models.event.Summary
+import dev.darkokoa.datetimewheelpicker.core.isAfter
+import domain.models.event.*
 import domain.util.extensions.toLocalDateTime
+import kotlinx.datetime.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import presentation.utils.extensions.formatToDate
 import presentation.utils.extensions.formatToTime
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 fun Document.toEvent(): Event {
     return Event(
@@ -59,6 +56,7 @@ private fun Document.toSummary(): Summary {
         address = address,
         startDate = dates.first,
         endDate = dates.second,
+        schedules = getAllDatesBetween(start = dates.first, end = dates.second),
         time = this.time(),
         imageUrl = this.imageUrl()
     )
@@ -94,21 +92,40 @@ private fun extractTitleAndLocation(input: String): Pair<String, String> {
 }
 
 private fun convertToDates(dateRange: String): Pair<LocalDate, LocalDate> {
-    // Define the date format
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    fun parseDate(dateString: String): LocalDate {
+        val parts = dateString.split("/")
+        val day = parts[0].toInt()
+        val month = parts[1].toInt()
+        val year = parts[2].toInt()
+        return LocalDate(year, month, day)
+    }
 
-    // Split the input string to get start and end dates
     val dates = dateRange.split(" até ")
 
-    val startDate = LocalDate.parse(dates[0], formatter)
+    val startDate = parseDate(dates[0])
 
-    val endDate = if (dates.size != 2){
+    val endDate = if (dates.size != 2) {
         startDate
     } else {
-        LocalDate.parse(dates[1], formatter)
+        parseDate(dates[1])
     }
 
     return Pair(startDate, endDate)
+}
+
+private fun getAllDatesBetween(start: LocalDate, end: LocalDate): List<Schedule> {
+    val dates = mutableListOf<Schedule>()
+    var current = start
+
+    while (current <= end) {
+
+        val time = current.atStartOfDayIn(TimeZone.UTC).toLocalDateTime(TimeZone.UTC)
+
+        dates.add(Schedule(time = time, currentHour = ""))
+        current = current.plus(1, DateTimeUnit.DAY)
+    }
+
+    return dates
 }
 
 private fun Document.toTitle() = select("h1.title-single-event").text()

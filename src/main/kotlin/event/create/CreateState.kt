@@ -13,5 +13,6 @@ data class CreateState(
     val performances: List<Performance> = emptyList(),
     val coordinates: Coordinates = Coordinates(),
     val performanceTypes: List<DropdownItem> = emptyList(),
-    val eventTypes: List<DropdownItem> = emptyList()
+    val eventTypes: List<DropdownItem> = emptyList(),
+    val currentSchedules: List<DropdownItem> = emptyList()
 )

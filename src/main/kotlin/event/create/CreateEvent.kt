@@ -1,15 +1,23 @@
 package event.create
 
 sealed interface CreateEvent {
-    data class UpdateUrl(val url: String): CreateEvent
-    data object LoadFromUrl: CreateEvent
-    data class UpdateType(val id: Int): CreateEvent
-    data class UpdateTitle(val title: String): CreateEvent
-    data class UpdateLocation(val location: String): CreateEvent
-    data class UpdateAvenue(val avenue: String): CreateEvent
-    data class UpdateAddress(val address: String): CreateEvent
-    data class UpdateLatitude(val latitude: String): CreateEvent
-    data class UpdateLongitude(val longitude: String): CreateEvent
+    sealed interface SummaryEvent : CreateEvent {
+        data class UpdateType(val id: Int): SummaryEvent
+        data class UpdateTitle(val title: String): SummaryEvent
+        data class UpdateLocation(val location: String): SummaryEvent
+        data class UpdateAvenue(val avenue: String): SummaryEvent
+        data class UpdateAddress(val address: String): SummaryEvent
+        data class UpdateLatitude(val latitude: String): SummaryEvent
+        data class UpdateLongitude(val longitude: String): SummaryEvent
+        data class RemoveSchedule(val index: Int): SummaryEvent
+        data class UpdateScheduleDate(val index: Int, val date: String): SummaryEvent
+        data class UpdateScheduleHour(val index: Int, val hour: String): SummaryEvent
+    }
+
+    sealed interface CooltureEvent : CreateEvent {
+        data class UpdateUrl(val url: String): CooltureEvent
+        data object LoadFromUrl: CooltureEvent
+    }
 
     sealed interface PerformaceEvent : CreateEvent {
         data class UpdateType(val index: Int, val id: Int): PerformaceEvent

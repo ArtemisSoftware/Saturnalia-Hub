@@ -2,6 +2,7 @@ package presentation.utils.extensions
 
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
 
 
 fun LocalDate.format(format: String = "dd-MM-yyyy"): String {
@@ -22,3 +23,10 @@ fun LocalDateTime.formatToTime(format: String = "HH:mm"): String {
 
     return format.replace("HH", hour).replace("mm", minute)
 }
+
+
+fun LocalDateTime.updateDate(year: Int, month: Int, day: Int): LocalDateTime =
+    LocalDateTime(LocalDate(year, month, day), this.time)
+
+fun LocalDateTime.updateHour(hour: Int, minute: Int): LocalDateTime =
+    LocalDateTime(this.date, LocalTime(hour, minute))
