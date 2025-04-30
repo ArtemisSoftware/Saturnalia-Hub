@@ -22,6 +22,7 @@ import presentation.utils.DateUtil
 import presentation.utils.extensions.format
 import presentation.utils.extensions.formatToDate
 import presentation.utils.extensions.formatToTime
+import presentation.utils.extensions.toPortuguese
 import presentation.utils.transformation.DateVisualTransformation
 import presentation.utils.transformation.TimeVisualTransformation
 
@@ -40,7 +41,7 @@ internal fun ScheduleItem(
     ) {
         OutlinedTextField(
             value = schedule.currentDate,
-            label = { Text(schedule.time.dayOfWeek.name) },
+            label = { Text(schedule.time.dayOfWeek.toPortuguese()) },
             onValueChange = {
                 updateStartDate(it)
             },

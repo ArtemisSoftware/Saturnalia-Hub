@@ -139,12 +139,12 @@ private fun Document.imageUrl() = select("div.image img").attr("src")
 
 private fun Document.toPerformances(): List<Performance>{
     val performance_0 = toPerformance0()
-//    val performance_1 = toPerformance1()
+    val performance_1 = toPerformance1()
 //    val performance_2 = toPerformance2()
-//    val performance_3 = toPerformance3()
+    val performance_3 = toPerformance3()
 //    val performance_4 = toPerformance4()
 
-    val performances = performance_0 //+ performance_1 + performance_2 + performance_3 + performance_4
+    val performances = performance_0 + performance_1 /*+ performance_2 */+ performance_3 //+ performance_4
 
     return performances
 }
@@ -173,7 +173,7 @@ private fun Document.toPerformance0(): List<Performance>{
 
     return performances
 }
-/*
+
 private fun Document.toPerformance1(): List<Performance>{
     val performances = mutableListOf<Performance>()
 
@@ -196,7 +196,7 @@ private fun Document.toPerformance1(): List<Performance>{
             performances.add(
                 Performance(
                     name = name,
-                    date = currentDate ?: "",
+                    date = currentDate?.toLocalDateTime(),
                     imageUrl = imageUrl
                 )
             )
@@ -205,7 +205,7 @@ private fun Document.toPerformance1(): List<Performance>{
 
     return performances
 }
-
+/*
 private fun Document.toPerformance2(): List<Performance>{
     val performances = mutableListOf<Performance>()
 
@@ -237,7 +237,7 @@ private fun Document.toPerformance2(): List<Performance>{
 
     return performances
 }
-
+*/
 private fun Document.toPerformance3(): List<Performance> {
     val performances = mutableListOf<Performance>()
     val dateElements = this.select("span[style*=color: #333399]")
@@ -260,7 +260,7 @@ private fun Document.toPerformance3(): List<Performance> {
 
                 performances.add(
                     Performance(
-                        date = currentDate,
+                        date = currentDate?.toLocalDateTime(),
                         time = time,
                         name = name ?: "",
                         location = location ?: "",
@@ -272,7 +272,7 @@ private fun Document.toPerformance3(): List<Performance> {
     }
     return performances
 }
-
+/*
 private fun Document.toPerformance4(): List<Performance> {
     val performances = mutableListOf<Performance>()
 

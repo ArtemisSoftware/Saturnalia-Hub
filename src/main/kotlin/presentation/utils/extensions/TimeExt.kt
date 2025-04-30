@@ -1,5 +1,6 @@
 package presentation.utils.extensions
 
+import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -30,3 +31,13 @@ fun LocalDateTime.updateDate(year: Int, month: Int, day: Int): LocalDateTime =
 
 fun LocalDateTime.updateHour(hour: Int, minute: Int): LocalDateTime =
     LocalDateTime(this.date, LocalTime(hour, minute))
+
+fun DayOfWeek.toPortuguese(): String = when (this) {
+    DayOfWeek.MONDAY -> "Segunda-feira"
+    DayOfWeek.TUESDAY -> "Terça-feira"
+    DayOfWeek.WEDNESDAY -> "Quarta-feira"
+    DayOfWeek.THURSDAY -> "Quinta-feira"
+    DayOfWeek.FRIDAY -> "Sexta-feira"
+    DayOfWeek.SATURDAY -> "Sábado"
+    DayOfWeek.SUNDAY -> "Domingo"
+}
