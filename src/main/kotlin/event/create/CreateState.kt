@@ -18,6 +18,7 @@ val urls = listOf(
 )
 
 data class CreateState(
+    val json: String = "",
     val url: String = urls[0],
     val summary: Summary = Summary(),
     val performances: List<Performance> = emptyList(),

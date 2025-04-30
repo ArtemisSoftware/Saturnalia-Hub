@@ -13,6 +13,7 @@ internal fun Menu(
     numberOfPerformances: Int,
     showDialog: () -> Unit,
     updateMenuOption: (MenuType) -> Unit,
+    showJsonDialog: () -> Unit,
     modifier: Modifier = Modifier,
 ){
     Column(
@@ -31,6 +32,10 @@ internal fun Menu(
         OutlinedButton(onClick = showDialog) {
             Text("Download evento Coolture ")
         }
+
+        OutlinedButton(onClick = showJsonDialog) {
+            Text("Download json")
+        }
     }
 }
 
@@ -40,6 +45,7 @@ private fun MenuPreview() {
     Menu(
         numberOfPerformances = 2,
         showDialog = {},
+        showJsonDialog = {},
         updateMenuOption = {}
     )
 }

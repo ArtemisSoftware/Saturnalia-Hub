@@ -17,7 +17,7 @@ internal fun LoadFromCooltureUrlDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text("Url to download")
+            Text("Url para download")
         },
         text = {
             OutlinedTextField(

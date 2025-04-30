@@ -29,7 +29,7 @@ internal fun Banner(
             fontSize = 24.sp
         )
 
-        if(imageUrl.isNotEmpty()) {
+        if(imageUrl.isNotEmpty() && imageUrl.isNullOrEmpty()) {
             Image(
                 modifier = Modifier.fillMaxWidth().weight(0.5F),
                 bitmap = ImageContainer.getImage(imageUrl),

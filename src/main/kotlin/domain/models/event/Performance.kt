@@ -1,8 +1,9 @@
 package domain.models.event
 
 import kotlinx.datetime.LocalDateTime
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class Performance(
     val date: LocalDateTime? = null,
     val typeId: Int? = null,
