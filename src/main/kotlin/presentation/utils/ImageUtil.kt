@@ -2,6 +2,8 @@ package presentation.utils
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
+import androidx.compose.ui.res.loadImageBitmap
+import androidx.compose.ui.res.useResource
 import org.jetbrains.skia.Image
 import java.io.ByteArrayOutputStream
 import java.net.HttpURLConnection
@@ -11,19 +13,33 @@ import javax.imageio.ImageIO
 object ImageUtil {
 
     fun loadNetworkImage(link: String): ImageBitmap {
-        val url = URL(link)
-        val connection = url.openConnection() as HttpURLConnection
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0")
-        connection.connect()
+        return try {
+            val url = URL(link)
+            val connection = url.openConnection() as HttpURLConnection
+            connection.instanceFollowRedirects = true
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0")
+            connection.connect()
 
-        val inputStream = connection.inputStream
-        val bufferedImage = ImageIO.read(inputStream)
+            val responseCode = connection.responseCode
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                throw IllegalArgumentException("HTTP error: $responseCode")
+            }
 
-        val stream = ByteArrayOutputStream()
-        ImageIO.write(bufferedImage, "png", stream)
-        val byteArray = stream.toByteArray()
+            val contentType = connection.contentType
+            if (!contentType.startsWith("image/")) {
+                throw IllegalArgumentException("Invalid content type: $contentType")
+            }
 
-        return Image.makeFromEncoded(byteArray).toComposeImageBitmap()
+            val bytes = connection.inputStream.readBytes()
+            if (bytes.isEmpty()) {
+                throw IllegalArgumentException("Image stream is empty")
+            }
+
+            Image.makeFromEncoded(bytes).toComposeImageBitmap()
+        } catch (e: Exception) {
+            // Fallback to local error image
+            useResource("error_image.png", ::loadImageBitmap)
+        }
     }
 
 }
