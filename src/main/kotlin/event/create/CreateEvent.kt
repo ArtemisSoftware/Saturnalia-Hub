@@ -12,6 +12,7 @@ sealed interface CreateEvent {
         data class RemoveSchedule(val index: Int): SummaryEvent
         data class UpdateScheduleDate(val index: Int, val date: String): SummaryEvent
         data class UpdateScheduleHour(val index: Int, val hour: String): SummaryEvent
+        data class UpdateImageUrl(val url: String): SummaryEvent
     }
 
     sealed interface CooltureEvent : CreateEvent {
@@ -33,6 +34,7 @@ sealed interface CreateEvent {
         data class UpdateDate(val index: Int, val date: String): PerformaceEvent
         data class UpdateHour(val index: Int, val hour: String): PerformaceEvent
         data class Delete(val index: Int): PerformaceEvent
+        data class UpdateImageUrl(val index: Int, val url: String): PerformaceEvent
     }
 
 }

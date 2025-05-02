@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,7 +16,7 @@ import presentation.utils.ImageContainer
 @Composable
 internal fun Banner(
     imageUrl: String,
-    getImage: (String) -> Unit,
+    updateImageUrl: (String) -> Unit,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -29,7 +28,7 @@ internal fun Banner(
             fontSize = 24.sp
         )
 
-        if(imageUrl.isNotEmpty() && imageUrl.isNullOrEmpty()) {
+        if(imageUrl.isNotEmpty() && !imageUrl.isNullOrEmpty()) {
             Image(
                 modifier = Modifier.fillMaxWidth().weight(0.5F),
                 bitmap = ImageContainer.getImage(imageUrl),
@@ -39,12 +38,8 @@ internal fun Banner(
         OutlinedTextField(
             value = imageUrl,
             label = { Text("Url") },
-            onValueChange = {},
+            onValueChange = updateImageUrl,
         )
-
-        OutlinedButton(onClick = { getImage(imageUrl) }) {
-            Text("Obter Imagem")
-        }
     }
 }
 
@@ -53,6 +48,6 @@ internal fun Banner(
 private fun BannerPreview() {
     Banner(
         imageUrl = "",
-        getImage = {}
+        updateImageUrl = {},
     )
 }
